@@ -1,2 +1,5 @@
 *.ipynb
 *.log
+*.tex
+*.aux
+*.pdf
