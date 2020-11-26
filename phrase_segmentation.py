@@ -1,5 +1,27 @@
+# text segmentation ustitilite
+# ref: https://www.nltk.org/book/ch03.html
+# author: Amin Ahmadi
+# date: Nov 2020
+########################################
 from random import randint
+import numpy as np
+import numpy.random as rnd
 
+class TextSegment():
+
+    def __init__(self, text):
+        self.text = text
+        self.no_space_text =  ''.join(self.text.split())
+        self.no_space_length = len(self.no_space_text)
+        self.seg0 = ''.join(list(rnd.randint(0,2,self.no_space_length).astype(str)))
+       
+    def _no_space_text(self):
+        return ''.join(self.text.split())
+
+
+##### End of TextSegment Class
+
+########## 
 def segment(text, segs):
     words = []
     last = 0
@@ -7,23 +29,30 @@ def segment(text, segs):
         if segs[i] == '1':
             words.append(text[last:i+1])
             last = i+1
-    words.append(text[last:])
+            words.append(text[last:])
     return words
 
+########## 
 def evaluate(text, segs):
     words = segment(text, segs)
     text_size = len(words)
     lexicon_size = sum(len(word) + 1 for word in set(words))
     return text_size + lexicon_size
 
+########## 
 def flip(segs, pos):
     return segs[:pos] + str(1-int(segs[pos])) + segs[pos+1:]
 
+########## 
 def flip_n(segs, n):
     for i in range(n):
         segs = flip(segs, randint(0, len(segs)-1))
     return segs
 
+##########
+def no_space_text(text):
+    return ''.join(text.split())
+########## 
 def anneal(text, segs, iterations, cooling_rate):
     temperature = float(len(segs))
     while temperature > 0.5:
@@ -36,5 +65,7 @@ def anneal(text, segs, iterations, cooling_rate):
         score, segs = best, best_segs
         temperature = temperature / cooling_rate
         print(evaluate(text, segs), segment(text, segs))
+    print()
+    print(evaluate(text, segs), segment(text, segs))
     print()
     return segs

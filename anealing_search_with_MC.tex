@@ -1,15 +1,84 @@
 \documentclass[11pt]{article}
-\begin{document}
-To evaluate the segmentation score, non-deterministic search by mean of
-simulated anealing has been used. In the oroginal implementation the interaction
-between segments has been ignored based on the assumption that there is no information in a such short text to be extracted.
-Here we propose the Markov transition matric as an interaction between segments to evaluate the free energy more accurately.
+\usepackage{amsmath}
 
-\section{Theory}
+\newcommand{\hl}{\mathcal{H}}
+\newcommand{\zl}{\mathcal{Z}}
+\newcommand{\upp}{\uparrow}
+\newcommand{\dnn}{\downarrow}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+\begin{document}
+
+%%%%%%%%%% 
+\section{Introduction}
+For text-segmentation, a non-deterministic search by mean of {\em
+  Simulated Annealing} {\bf(SA)} has been used. In the oroginal
+implementation the interaction between segments has been taken into
+account by scanning through the text and evaluate the segmentation
+based on two variables
+%% 
 \begin{itemize}
-\item overview of simulated annnealing
-\item search for a ground state
-\item solve a simple Ising model
-\item Interactive and non-Interactive system
+\item lexicon length
+\item segment length
 \end{itemize}
+%%
+That can be reformulated in terms of repetition of a segment and its
+length.
+
+Here we propose the Markov transition matric as an
+interaction between segments to evaluate the free energy more
+accurately.
+
+\begin{itemize}
+\item Overview of simulated annnealing
+\item Search for the ground state
+\item Ising model and its relevance to text segmentation
+\item Interactive and non-Interactive system
+\item Spin lakes and Ferromagnetism 
+\end{itemize}
+
+%%%%%%%%%% 
+\section{Statistical Mechanics (Review)}
+
+Lets consider a spin chain of $N$ sites in presence of an applied
+magnetic filed. The Hamiltonian (energy) of the system is
+%%
+\begin{equation}
+  \hl = \bs{B}\cdot \bs{\mu} = \mu_0 B_0 \sum_i s_i
+\end{equation}
+%%
+Let $n_\upp$ and $n_\dnn$ represent the number of spins in
+the chain that are parallel and anti-parallel to $\bs{B}$,
+respectively. To follow {\em Macrocanonical} formalism, we write down
+the total number of accessible energy state
+%%
+\begin{equation}
+  \Omega = \frac{N!}{n_{\upp}! n_{\dnn}!}
+\end{equation}
+%%
+and we know
+%%
+\begin{equation}
+  n_\upp + n_\dnn = N, \qquad n_\upp - n_\dnn = \frac{E}{B_0 \mu_0}
+\end{equation}
+%%
+
+
+%%%%%
+\subsection{Canonical Approach}
+The partition fucntion reads
+%%
+\begin{equation}
+  \zl = \sum_i e^{\beta \epsilon_i}
+\end{equation}
+%%
+where for a spin-chain in presense of applied mangetic field is
+%%
+\begin{equation}
+  \zl = \sum_{n_\upp} e^{\beta (n_\upp - n_\dnn)\mu_0 B_0}
+\end{equation}
+%% 
+%%%%%%%%%%
+\section{Spin Colony}
+Partialy ordered system
 \end{document}
